@@ -3,10 +3,10 @@ package com.devsu.client_service.service.impl;
 import com.devsu.client_service.domain.Client;
 import com.devsu.client_service.dto.request.ClientRequest;
 import com.devsu.client_service.dto.response.ClientResponse;
+import com.devsu.client_service.exception.ResourceNotFoundException;
 import com.devsu.client_service.mapper.ClientMapper;
 import com.devsu.client_service.repository.ClientRepository;
 import com.devsu.client_service.service.ClientService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientResponse getById(UUID id) {
 
         Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Client not found with id: " + id
                 ));
 
@@ -59,7 +59,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientResponse update(UUID id, ClientRequest request) {
 
         Client existingClient = clientRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Client not found with id: " + id
                 ));
 
@@ -83,7 +83,7 @@ public class ClientServiceImpl implements ClientService {
     public void delete(UUID id) {
 
         if (!clientRepository.existsById(id)) {
-            throw new EntityNotFoundException(
+            throw new ResourceNotFoundException(
                     "Client not found with id: " + id
             );
         }
