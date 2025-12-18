@@ -4,6 +4,8 @@ import com.devsu.client_service.domain.Client;
 import com.devsu.client_service.dto.request.ClientRequest;
 import com.devsu.client_service.dto.response.ClientResponse;
 
+import java.util.List;
+
 public class ClientMapper {
 
     public static Client toEntity(ClientRequest dto) {
@@ -30,6 +32,12 @@ public class ClientMapper {
                 client.getClientId(),
                 client.getStatement()
         );
+    }
+
+    public List<ClientResponse> toResponseList(List<Client> clients) {
+        return clients.stream()
+                .map(ClientMapper::toResponse)
+                .toList();
     }
 }
 
