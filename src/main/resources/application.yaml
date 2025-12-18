@@ -1,3 +1,25 @@
 spring:
-  application:
-    name: client-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/client_db?options=-c%20TimeZone=UTC
+    username: postgres
+    password: postgres
+
+    hikari:
+      connection-init-sql: SET TIME ZONE 'UTC'
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
