@@ -1,19 +1,20 @@
 package com.devsu.client_service.service;
 
-import com.devsu.client_service.domain.Client;
+import com.devsu.client_service.dto.request.ClientRequest;
+import com.devsu.client_service.dto.response.ClientResponse;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ClientService {
 
-    Client create(Client client);
+    ClientResponse create(ClientRequest request);
 
-    Client findById(UUID id);
+    ClientResponse getById(UUID id);
 
-    List<Client> findAll();
+    List<ClientResponse> getAll();
 
-    Client update(UUID id, Client client);
+    ClientResponse update(UUID id, ClientRequest request);
 
     void delete(UUID id);
 }
