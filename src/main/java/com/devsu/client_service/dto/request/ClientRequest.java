@@ -27,6 +27,7 @@ public record ClientRequest (
 
     @NotNull
     Boolean statement,
+
     Gender gender,
     String address,
     String phone
