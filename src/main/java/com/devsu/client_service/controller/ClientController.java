@@ -1,6 +1,5 @@
 package com.devsu.client_service.controller;
 
-import com.devsu.client_service.domain.Client;
 import com.devsu.client_service.dto.request.ClientRequest;
 import com.devsu.client_service.dto.response.ClientResponse;
 import com.devsu.client_service.mapper.ClientMapper;
@@ -17,11 +16,9 @@ import java.util.UUID;
 public class ClientController {
 
     private final ClientService clientService;
-    private final ClientMapper clientMapper;
 
-    public ClientController(ClientService clientService, ClientMapper clientMapper) {
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
-        this.clientMapper = clientMapper;
     }
 
     @PostMapping
