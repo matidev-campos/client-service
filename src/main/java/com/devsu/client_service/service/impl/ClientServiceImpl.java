@@ -5,6 +5,7 @@ import com.devsu.client_service.dto.request.ClientRequest;
 import com.devsu.client_service.dto.response.ClientResponse;
 import com.devsu.client_service.exception.ResourceNotFoundException;
 import com.devsu.client_service.mapper.ClientMapper;
+import com.devsu.client_service.messaging.producer.ClientEventProducer;
 import com.devsu.client_service.repository.ClientRepository;
 import com.devsu.client_service.service.ClientService;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,14 @@ import java.util.UUID;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
+    private final ClientEventProducer eventProducer;
 
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(
+            ClientRepository clientRepository,
+            ClientEventProducer eventProducer
+    ) {
         this.clientRepository = clientRepository;
+        this.eventProducer = eventProducer;
     }
 
 
@@ -28,6 +34,8 @@ public class ClientServiceImpl implements ClientService {
         Client client = ClientMapper.toEntity(request);
 
         Client savedClient = clientRepository.save(client);
+
+        eventProducer.sendClientCreated(savedClient.getId(),savedClient.getName(),savedClient.getIdentification());
 
         return ClientMapper.toResponse(savedClient);
     }
@@ -89,6 +97,7 @@ public class ClientServiceImpl implements ClientService {
         }
 
         clientRepository.deleteById(id);
+        eventProducer.sendClientDeleted(id);
     }
 }
 
