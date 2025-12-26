@@ -12,9 +12,9 @@ public class Client extends Person {
 
     @Column(name = "client_id", nullable = false, unique = true)
     private String clientId;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String password;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Boolean statement;
 
     public Client() {
