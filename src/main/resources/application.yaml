@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/client_db?options=-c%20TimeZone=UTC
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/devsu?options=-c%20TimeZone=UTC
+    username: devsu
+    password: devsu
 
     hikari:
       connection-init-sql: SET TIME ZONE 'UTC'
